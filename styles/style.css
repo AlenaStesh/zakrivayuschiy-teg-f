@@ -12,7 +12,7 @@
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
-  font-family: var(--main-font);
+  font-family: var(--main-font, 'Inter', sans-serif);
   background-image: var(--bg-page-gradient);
   background-size: cover;
   background-attachment: fixed;
@@ -21,7 +21,7 @@
 
 .header {
   padding: 100px 0;
-  min-block-size: var(--block-width);
+  min-block-size: 375px;
   min-height: 527px;
   display: grid;
   grid-template-columns: 1fr;
@@ -30,16 +30,27 @@
 }
 
 .header__content-block {
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+  border: 2px solid var(--border-color, #000);
   background-color: var(--bg-color);
 }
 
 .header__title {
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-size: clamp(49px, 43.37px + 1.50vw, 65px);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header__subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .main-content {
@@ -54,7 +65,7 @@
 .main-content__cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 51px;
+  gap: 49px;
 }
 
 .card-item {
@@ -65,9 +76,48 @@
 }
 
 .card__title {
-  font-family: var(--main-font);
+  font-weight: 715;
+  font-style: bold;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.card-image {
+  min-width: 371px;
+  min-height: 371px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card__text {
   padding: 25px;
+  font-size: var(--text-font-size, 18px);
+}
+
+.card__text-memories {
+  padding-top: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  gap: 18px;
+}
+
+.card__icon-button {
+  background-color: transparent;
+  border: none;
+  width: 27px;
+}
+
+.card__like-button {
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-size: 14px;
+  background-color: transparent;
+  min-width: 130px;
+  min-height: 38px;
 }

@@ -20,9 +20,9 @@
             #e7e7e7 0.01%,
             #1a1a1a 100%
         );
-    --block-width: clamp(375px, 260.56px + 30.52vw, 700px);
-    --main-font: 'Inter-Variable';
+    --main-font: 'Inter';
     --accent-font: 'PressStart2P-Regular';
+    --text-font-size: 18px;
     --border-color: #000;
     --bg-color: #fff;
 }
