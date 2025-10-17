@@ -48,7 +48,7 @@
 }
 
 .header__subtitle {
-  font-size: 14px;
+  font-size: var(--text-font-size-small, 14px);
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -82,6 +82,39 @@
   padding: 5px 10px;
 }
 
+.card-image__container {
+  /* без свойства line-height обёртка изображения
+   создаёт лишние пиксели под картинкой */
+  line-height: 0;
+  position: relative;
+}
+
+.card-label {
+  position: absolute;
+  top: 35px;
+  right: 25px;
+  opacity: 0.6;
+  mix-blend-mode: hard-light;
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-size: var(--text-font-size-small, 14px);
+}
+
+@supports (text-stroke: 1px #fff) {
+  .card-label {
+    -webkit-text-stroke: 1px #fff;
+  }
+}
+
+@supports not (text-stroke: 1px #fff) {
+  .card-label {
+    text-shadow:
+      -1px -1px #fff,
+      1px -1px #fff,
+      -1px 1px #fff,
+      1px 1px #fff;
+  }
+}
+
 .card-image {
   min-width: 371px;
   min-height: 371px;
@@ -99,7 +132,7 @@
   padding-top: 0;
 }
 
-.button-container {
+.button-container__like {
   display: flex;
   justify-content: end;
   align-items: end;
@@ -116,8 +149,31 @@
 
 .card__like-button {
   font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
-  font-size: 14px;
+  font-size: var(--text-font-size-small, 14px);
   background-color: transparent;
   min-width: 130px;
   min-height: 38px;
+}
+
+.button-container__save {
+  margin: 51px 34.5px 100px 34.5px;
+  background-color: #fff;
+}
+
+.button-save {
+  min-block-size: 84px;
+  min-width: 306px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-size: var(--text-font-size-small, 14px);
+}
+
+.dialog-text {
+  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-size: var(--text-font-size-small, 14px);
 }
