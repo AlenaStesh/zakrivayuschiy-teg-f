@@ -269,7 +269,7 @@
           <button 
             class="button-save" 
             type="button" 
-            onclick="window['dialog-id'].show()" 
+            onclick="window['dialog-id'].showModal()" 
             aria-controls="dialog-id">
             <svg class="button-save-icon" width="28" height="28" aria-hidden="true">
             <use href="svg/icon-save.svg#icon-save"></use>
@@ -278,10 +278,26 @@
           </button>
         </div>
         <dialog id="dialog-id">
-          <svg class="button-save-icon" width="28" height="28" aria-hidden="true">
-          <use href="svg/icon-save.svg#icon-save"></use>
-          </svg>
-          <span class="dialog-text">Вставьте дискету, чтобы продолжить</span>
+          <div class="dialog__diskette">
+            <div class="dialog__flex-container">
+            <svg 
+              class="button-save-icon" 
+              width="39"
+              height="39"
+              aria-hidden="true" 
+              viewBox="0 0 39 39">
+            <use href="svg/icon-save.svg#icon-save"></use>
+            </svg>
+            <span class="dialog__text">Вставьте дискету, чтобы продолжить
+            </span>
+            </div>
+            <button 
+            class="button__ok"
+            type="button" 
+            onclick="window['dialog-id'].close()">
+            <span class="button__text">OK</span>
+            </button>
+          </div>
         </dialog>
       </section>
     </main>
