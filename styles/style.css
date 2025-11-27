@@ -50,7 +50,7 @@
 
 .header__subtitle {
   font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
-  font-size: clamp(14px, 10,71px + 0,88vw, 23px);
+  font-size: clamp(14px, 10.71px + 0.88vw, 23px);
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -79,7 +79,6 @@
 
 .card__title {
   font-weight: 715;
-  font-style: bold;
   font-size: 18px;
   padding: 5px 10px;
 }
@@ -89,6 +88,8 @@
    создаёт лишние пиксели под картинкой */
   line-height: 0;
   position: relative;
+  outline: 2px solid #000;
+  overflow: hidden;
 }
 
 .card-label {
@@ -99,6 +100,31 @@
   mix-blend-mode: hard-light;
   font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
   font-size: var(--text-font-size-small, 14px);
+  z-index: 5;
+}
+
+.filter__hue-rotate {
+  filter: hue-rotate(-330deg);
+}
+
+.filter__brightness {
+  filter: saturate(200%);
+}
+
+.filter__invert {
+  filter: invert(0.8);
+}
+
+.filter__retro {
+  filter: sepia(90%);
+}
+
+.filter__blur {
+  filter: blur(0.5rem);
+}
+
+.filter__combine {
+  filter: invert(0.8) hue-rotate(-260deg);
 }
 
 @supports (text-stroke: 1px #fff) {
@@ -137,22 +163,56 @@
 .button-container__like {
   display: flex;
   justify-content: end;
-  align-items: end;
   margin-right: 25px;
   margin-bottom: 25px;
-  gap: 18px;
+  gap: 6px;
 }
 
 .card__icon-button {
   background-color: transparent;
   border: none;
-  width: 27px;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border: 2px solid currentColor;
 }
 
 .card__like-button {
+  position: relative;
+  overflow: hidden;
   background-color: transparent;
   min-width: 130px;
   min-height: 38px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card__like-button .button__text {
+  position: relative;
+  color: white;
+  background-color: black;
+  mix-blend-mode: difference;
+}
+
+.card__like-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card__like-button:hover::before {
+  transform: translateX(0);
+}
+
+.card__like-button:focus {
+  box-shadow: 2px 2px 0 currentColor;
+  outline: none;
 }
 
 .button__text {
@@ -165,6 +225,12 @@
   background-color: #fff;
 }
 
+.button-save-icon {
+  flex-shrink: 0;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
 .button-save {
   min-block-size: 84px;
   min-width: 306px;
@@ -173,11 +239,39 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  position: relative;
+  overflow: hidden;
   background-color: transparent;
+  transition: box-shadow 0.3s ease;
+}
+
+.button-save .button__text {
+  position: relative;
+  color: white;
+  background-color: black;
+  mix-blend-mode: difference;
+}
+
+.button-save::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.button-save:hover::before {
+  transform: translateX(0);
+}
+
+.button-save:focus {
+  box-shadow: 2px 2px 0 currentColor;
+  outline: none;
 }
 
 .dialog__diskette {
-  max-width: 341px;
+  max-width: 345px;
   max-height: 191px;
   display: flex;
   flex-direction: column;
@@ -186,19 +280,15 @@
   margin-top: 14px;
   margin-bottom: 14px;
   margin-right: 24px;
-  margin-left: 24px;
+  margin-left: 18px;
   gap: 30px;
 }
 
 .dialog__flex-container {
   display: flex;
   gap: 20px;
-  min-width: 261px;
+  min-width: 263px;
   justify-content: end;
-}
-
-.button-save-icon {
-  flex-shrink: 0;
 }
 
 .dialog__text {
@@ -209,12 +299,44 @@
 }
 
 .button__ok {
-  min-inline-size: 261px;
-  max-inline-size: 261px;
-  min-block-size: 38px;
-  max-block-size: 38px;
+  min-inline-size: 262px;
+  max-inline-size: 262px;
+  min-block-size: 39px;
+  max-block-size: 39px;
+  position: relative;
+  overflow: hidden;
   background: transparent;
   margin-inline: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.button__ok::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.button__ok:hover::before {
+  transform: translateX(0);
+}
+
+.button__ok .button__text {
+  position: relative;
+  color: white;
+  background-color: black;
+  mix-blend-mode: difference;
+}
+
+.button__ok:focus {
+  box-shadow: 2px 2px 0 currentColor;
+  outline: none;
+}
+
+dialog::backdrop {
+  background-color: rgb(0, 0, 0, 0.7);
 }
 
 @media (width >= 768px) {
