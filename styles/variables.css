@@ -26,4 +26,6 @@
     --text-font-size-small: 14px;
     --border-color: #000;
     --bg-color: #fff;
+    --like-icon-contour-color: #000;
+    --like-icon-fill-color: #ff0000;
 }
