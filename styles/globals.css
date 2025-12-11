@@ -30,6 +30,10 @@ a {
   color: inherit;
 }
 
+dialog {
+  padding: 0;
+}
+
 button,
 input {
   color: currentColor;

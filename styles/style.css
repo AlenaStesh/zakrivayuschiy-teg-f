@@ -22,8 +22,6 @@
 
 .header {
   padding: 100px 0;
-  min-block-size: 375px;
-  min-height: 527px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
@@ -31,25 +29,26 @@
 }
 
 .header__content-block {
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: 122px 0;
   border: 2px solid var(--border-color, #000);
   background-color: var(--bg-color);
 }
 
 .header__title {
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   font-size: clamp(49px, 43.37px + 1.50vw, 65px);
   font-weight: 400;
   font-style: normal;
 }
 
 .header__subtitle {
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   font-size: clamp(14px, 10.71px + 0.88vw, 23px);
   font-weight: 400;
   text-transform: uppercase;
@@ -78,7 +77,7 @@
 }
 
 .card__title {
-  font-weight: 715;
+  font-variation-settings: "wght" 750;
   font-size: 18px;
   padding: 5px 10px;
 }
@@ -95,11 +94,31 @@
   position: absolute;
   top: 35px;
   right: 25px;
-  opacity: 0.6;
+  opacity: 0.5;
   mix-blend-mode: hard-light;
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   font-size: var(--text-font-size-small, 14px);
   z-index: 5;
+  text-transform: uppercase;
+  text-shadow:
+    -1px -1px #fff,
+    1px -1px #fff,
+    -1px 1px #fff,
+    1px 1px #fff;
+}
+
+@supports (-webkit-text-stroke: 1px #fff) {
+  .card-label {
+    -webkit-text-stroke: 1px #fff;
+    text-shadow: none;
+  }
+}
+
+@supports (text-stroke: 1px #fff) {
+  .card-label {
+    text-stroke: 1px #fff;
+    text-shadow: none;
+  }
 }
 
 .filter__hue-rotate {
@@ -126,22 +145,6 @@
   filter: hue-rotate(-250deg) saturate(200%);
 }
 
-@supports (text-stroke: 1px #fff) {
-  .card-label {
-    -webkit-text-stroke: 1px #fff;
-  }
-}
-
-@supports not (text-stroke: 1px #fff) {
-  .card-label {
-    text-shadow:
-      -1px -1px #fff,
-      1px -1px #fff,
-      -1px 1px #fff,
-      1px 1px #fff;
-  }
-}
-
 .card-image {
   min-width: 371px;
   min-height: 371px;
@@ -150,13 +153,15 @@
   object-fit: cover;
 }
 
-.card__text {
-  padding: 25px;
-  font-size: var(--text-font-size, 18px);
+.card-text__container {
+  margin: 25px;
+  gap: 25px;
+  display: grid;
 }
 
-.card__text-memories {
-  padding-top: 0;
+.card__text {
+  font-size: var(--text-font-size, 18px);
+  font-variation-settings: "wght" 400;
 }
 
 .button-container__like {
@@ -169,6 +174,8 @@
 .card__icon-button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
 .contour {
@@ -177,9 +184,11 @@
 
 .core {
   transition: fill 0.3s linear 0.03s;
+  fill: transparent;
 }
 
 .main-body {
+  fill: transparent;
   transition: fill 0.3s linear 0s;
 }
 
@@ -240,13 +249,16 @@
   border: 2px solid currentColor;
 }
 
-.card__like-button {
+.button {
+  transition: box-shadow 0.3s ease;
+  background: transparent;
   position: relative;
   overflow: hidden;
-  background-color: transparent;
+}
+
+.card__like-button {
   min-width: 130px;
   max-height: 38px;
-  transition: box-shadow 0.3s ease;
 }
 
 .card__like-button .button__text {
@@ -256,7 +268,7 @@
   mix-blend-mode: difference;
 }
 
-.card__like-button::before {
+.button::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -275,14 +287,17 @@
 }
 
 .button__text {
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   font-size: var(--text-font-size-small, 14px);
+}
+
+.button__text-ok {
+  text-transform: uppercase;
 }
 
 .button-container__save {
   margin: 51px 34.5px 100px 34.5px;
   background-color: #fff;
-  max-block-size: 84px;
   max-width: 306px;
 }
 
@@ -300,10 +315,6 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  position: relative;
-  overflow: hidden;
-  background-color: transparent;
-  transition: box-shadow 0.3s ease;
 }
 
 .button-save .button__text {
@@ -311,15 +322,6 @@
   color: white;
   background-color: black;
   mix-blend-mode: difference;
-}
-
-.button-save::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #000;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
 }
 
 .button-save:hover::before {
@@ -332,17 +334,11 @@
 }
 
 .dialog__diskette {
-  max-width: 345px;
-  max-height: 191px;
+  min-width: 341px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 14px;
-  margin-bottom: 14px;
-  margin-right: 24px;
-  margin-left: 18px;
-  gap: 30px;
 }
 
 .dialog__flex-container {
@@ -350,10 +346,11 @@
   gap: 20px;
   min-width: 263px;
   justify-content: end;
+  margin: 30px 40px 15px;
 }
 
 .dialog__text {
-  font-family: var(--accent-font, 'PressStart2P-Regular', monospace);
+  font-family: var(--accent-font, 'PressStart2P', fantasy);
   font-size: var(--text-font-size-small, 14px);
   line-height: 150%;
   text-transform: uppercase;
@@ -361,23 +358,8 @@
 
 .button__ok {
   min-inline-size: 262px;
-  max-inline-size: 262px;
   min-block-size: 39px;
-  max-block-size: 39px;
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-  margin-inline: auto;
-  transition: box-shadow 0.3s ease;
-}
-
-.button__ok::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #000;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
+  margin: 15px 40px 30px;
 }
 
 .button__ok:hover::before {
@@ -397,7 +379,7 @@
 }
 
 dialog::backdrop {
-  background-color: rgb(0, 0, 0, 0.7);
+  background-color: rgb(0, 0, 0, 75%);
 }
 
 @media (width >= 768px) {
@@ -413,7 +395,6 @@ dialog::backdrop {
 
   .header__content-block {
     min-width: 705px;
-    min-height: 370px;
   }
 
   .header__title {
@@ -449,8 +430,24 @@ dialog::backdrop {
     min-inline-size: 335px;
     min-block-size: 59px;
     max-inline-size: 335px;
-    max-block-size: 59px;
     display: flex;
     flex-direction: row;
+  }
+
+  .dialog__diskette {
+    max-width: 353px;
+    margin: 0;
+  }
+
+  .dialog__flex-container {
+    margin: 30px;
+    margin-bottom: 15px;
+  }
+
+  .button__ok {
+    margin: 30px;
+    margin-top: 15px;
+    min-block-size: 38px;
+    min-inline-size: 293px;
   }
 }
